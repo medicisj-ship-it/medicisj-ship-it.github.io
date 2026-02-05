@@ -8,7 +8,6 @@
 <style>
 :root {
   --royal: #1e3a8a;
-  --royal-soft: #e8edff;
   --card: #ffffff;
   --ink: #0f172a;
   --muted: #6b7280;
@@ -29,16 +28,13 @@ header {
   font-size: 22px;
   font-weight: 700;
   color: white;
-  letter-spacing: -0.2px;
 }
 
-#stock-ticker {
-  padding: 0 16px 16px;
-}
+#stock-ticker { padding: 0 16px 16px; }
 
 .container {
   display: grid;
-  grid-template-columns: 300px 1fr 280px;
+  grid-template-columns: 320px 520px 260px;
   gap: 18px;
   padding: 16px;
   align-items: start;
@@ -48,9 +44,8 @@ header {
   background: var(--card);
   border-radius: 16px;
   padding: 16px;
-  box-shadow:
-    0 10px 30px rgba(15, 23, 42, 0.08),
-    0 2px 6px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08),
+              0 2px 6px rgba(15, 23, 42, 0.05);
 }
 
 .card h3 {
@@ -62,16 +57,8 @@ header {
   color: var(--muted);
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  padding: 7px 0;
-  line-height: 1.35;
-}
+ul { list-style: none; padding: 0; margin: 0; }
+li { padding: 7px 0; }
 
 a {
   text-decoration: none;
@@ -81,11 +68,9 @@ a {
 
 a:hover { text-decoration: underline; }
 
-/* Today Focus emphasis */
 .focus li {
   font-size: 15px;
   font-weight: 500;
-  color: var(--ink);
 }
 
 .focus li::before {
@@ -94,17 +79,15 @@ a:hover { text-decoration: underline; }
   margin-right: 8px;
 }
 
-.small {
-  font-size: 12px;
-  color: var(--muted);
+.small { font-size: 12px; color: var(--muted); }
+
+.column .card + .card { margin-top: 16px; }
+
+.icon {
+  display: inline-block;
+  width: 22px;
 }
 
-/* spacing between cards */
-.column .card + .card {
-  margin-top: 16px;
-}
-
-/* responsive */
 @media (max-width: 1100px) {
   .container { grid-template-columns: 1fr; }
   header { text-align: center; }
@@ -121,76 +104,75 @@ a:hover { text-decoration: underline; }
 
 <!-- LEFT COLUMN -->
 <div class="column">
+
   <div class="card">
     <h3>🔥 Today Focus</h3>
     <ul id="today-focus" class="focus">
       <li class="small">Loading…</li>
     </ul>
   </div>
-</div>
 
-<!-- CENTER COLUMN -->
-<div class="column">
   <div class="card">
     <h3>☀️ Daily Start</h3>
     <ul>
-      <li><a href="https://mail.google.com" target="_blank">Gmail</a></li>
-      <li><a href="https://www.nytimes.com" target="_blank">NYTimes</a></li>
-      <li><a href="https://www.syracuse.com" target="_blank">Syracuse.com</a></li>
+      <li><span class="icon">📧</span><a href="https://mail.google.com" target="_blank">Gmail</a></li>
+      <li><span class="icon">📰</span><a href="https://www.nytimes.com" target="_blank">NYTimes</a></li>
+      <li><span class="icon">🏠</span><a href="https://www.syracuse.com" target="_blank">Syracuse.com</a></li>
     </ul>
   </div>
+
+</div>
+
+<!-- MIDDLE COLUMN (INTENTIONALLY NARROWER) -->
+<div class="column">
 
   <div class="card">
     <h3>💼 Markets & Money</h3>
     <ul>
-      <li><a href="https://digital.fidelity.com/" target="_blank">Fidelity</a></li>
-      <li><a href="https://wealth.emaplan.com/ema/SignIn?ema%2Fria%2Fdakotawm" target="_blank">Wealth Mgmt (eMoney)</a></li>
-      <li><a href="https://shareworks.solium.com/solium/servlet/userLogin.do?message_key=sign_in_to_continue" target="_blank">Morgan Stanley at Work</a></li>
-      <li><a href="https://stocktwits.com/symbol/MDGL" target="_blank">MDGL – StockTwits</a></li>
+      <li><span class="icon">📊</span><a href="https://digital.fidelity.com/" target="_blank">Fidelity</a></li>
+      <li><span class="icon">💰</span><a href="https://wealth.emaplan.com/ema/SignIn?ema%2Fria%2Fdakotawm" target="_blank">eMoney</a></li>
+      <li><span class="icon">🏦</span><a href="https://shareworks.solium.com/solium/servlet/userLogin.do?message_key=sign_in_to_continue" target="_blank">Morgan Stanley</a></li>
+      <li><span class="icon">💬</span><a href="https://stocktwits.com/symbol/MDGL" target="_blank">MDGL (StockTwits)</a></li>
     </ul>
   </div>
 
   <div class="card">
     <h3>🧠 Tools</h3>
     <ul>
-      <li><a href="https://chatgpt.com" target="_blank">ChatGPT</a></li>
-      <li><a href="https://www.openevidence.com" target="_blank">OpenEvidence</a></li>
-      <li><a href="https://notebooklm.google.com" target="_blank">NotebookLM</a></li>
-      <li><a href="https://grok.com" target="_blank">Grok</a></li>
+      <li><span class="icon">🤖</span><a href="https://chatgpt.com" target="_blank">ChatGPT</a></li>
+      <li><span class="icon">🧪</span><a href="https://www.openevidence.com" target="_blank">OpenEvidence</a></li>
+      <li><span class="icon">📓</span><a href="https://notebooklm.google.com" target="_blank">NotebookLM</a></li>
+      <li><span class="icon">⚡</span><a href="https://grok.com" target="_blank">Grok</a></li>
     </ul>
   </div>
 
-  <div class="card">
-    <h3>🎷 Music</h3>
-    <ul>
-      <li><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank">Practice Roadmap</a></li>
-      <li><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank">Sax Practice Center</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank">Backing Tracks</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank">Sheet Music</a></li>
-      <li><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank">Music Contents</a></li>
-    </ul>
-  </div>
 </div>
 
 <!-- RIGHT COLUMN -->
 <div class="column">
+
   <div class="card">
-    <h3>🏥 Pharm Care Consulting</h3>
+    <h3>🎷 Music</h3>
     <ul>
-      <li><a href="https://medicisj-ship-it.github.io/pcc-website/" target="_blank">PCC Website</a></li>
+      <li><span class="icon">📄</span><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank">Practice Roadmap</a></li>
+      <li><span class="icon">🎷</span><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank">Practice Center</a></li>
+      <li><span class="icon">🎧</span><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank">Backing Tracks</a></li>
+      <li><span class="icon">🎼</span><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank">Sheet Music</a></li>
+      <li><span class="icon">📚</span><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank">Music Contents</a></li>
     </ul>
   </div>
 
   <div class="card">
-    <h3>🌐 Social Media</h3>
+    <h3>🌐 Social</h3>
     <ul>
-      <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-      <li><a href="https://x.com" target="_blank">X</a></li>
-      <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-      <li><a href="https://www.tiktok.com" target="_blank">TikTok</a></li>
-      <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+      <li><span class="icon">📘</span><a href="https://facebook.com" target="_blank">Facebook</a></li>
+      <li><span class="icon">🐦</span><a href="https://x.com" target="_blank">X</a></li>
+      <li><span class="icon">📸</span><a href="https://instagram.com" target="_blank">Instagram</a></li>
+      <li><span class="icon">🎥</span><a href="https://www.tiktok.com" target="_blank">TikTok</a></li>
+      <li><span class="icon">💼</span><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
     </ul>
   </div>
+
 </div>
 
 </div>
