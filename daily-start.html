@@ -20,7 +20,7 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   background:linear-gradient(180deg,var(--royal) 0%, #0b1f4d 220px, #f4f6fb 221px);
   color:var(--ink);
-  font-size:18px; /* bigger font */
+  font-size:18px;
 }
 
 header{
@@ -34,7 +34,8 @@ header{
 
 .container{
   display:grid;
-  grid-template-columns:340px 520px 300px 420px; /* + Calendar column */
+  /* narrower middle + narrower calendar */
+  grid-template-columns:340px 420px 300px 360px;
   gap:20px;
   padding:18px;
   align-items:start;
@@ -90,6 +91,20 @@ a:hover{ text-decoration:underline; }
   margin-right:10px;
 }
 
+/* Today Focus footer link */
+.focus-footer{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid #eef2ff;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.focus-footer a{
+  font-size:14px;
+  font-weight:700;
+}
+
 /* Calendar */
 .calendar-card{
   padding:0;
@@ -130,10 +145,15 @@ a:hover{ text-decoration:underline; }
   <div class="column">
     <div class="card">
       <h3>🔥 Today Focus</h3>
+
       <ul id="today-focus" class="focus">
         <li class="small">Loading…</li>
       </ul>
-      <div class="small" style="margin-top:8px;">Rule: max 6 items.</div>
+
+      <div class="focus-footer">
+        <span class="icon" style="width:auto;">✅</span>
+        <a href="https://tasks.google.com/" target="_blank" rel="noopener">Open Google Tasks</a>
+      </div>
     </div>
 
     <div class="card" style="margin-top:18px;">
@@ -146,7 +166,7 @@ a:hover{ text-decoration:underline; }
     </div>
   </div>
 
-  <!-- MIDDLE COLUMN -->
+  <!-- MIDDLE COLUMN (narrower) -->
   <div class="column">
     <div class="card">
       <h3>💼 Markets & Money</h3>
@@ -201,7 +221,7 @@ a:hover{ text-decoration:underline; }
     </div>
   </div>
 
-  <!-- FAR RIGHT COLUMN: CALENDAR -->
+  <!-- FAR RIGHT COLUMN: CALENDAR (narrower) -->
   <div class="column calendar-column">
     <div class="card calendar-card">
       <div class="calendar-head">
@@ -230,14 +250,18 @@ async function loadTodayFocus(){
     const data = await r.json();
     if(!data || !data.ok) throw new Error("feed");
     ul.innerHTML = "";
-    (data.tasks || []).slice(0,6).forEach(t => {
+
+    const tasks = Array.isArray(data.tasks) ? data.tasks : [];
+    if(tasks.length === 0){
+      ul.innerHTML = "<li class='small'>No tasks</li>";
+      return;
+    }
+
+    tasks.slice(0,10).forEach(t => {  // ✅ up to 10 now
       const li = document.createElement("li");
       li.textContent = t.title;
       ul.appendChild(li);
     });
-    if(!data.tasks || data.tasks.length === 0){
-      ul.innerHTML = "<li class='small'>No tasks</li>";
-    }
   }catch(e){
     ul.innerHTML = "<li class='small'>Unable to load tasks</li>";
   }
