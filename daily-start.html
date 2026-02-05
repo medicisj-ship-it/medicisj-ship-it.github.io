@@ -1,1 +1,159 @@
-https://script.google.com/macros/s/AKfycbwMKRGs2tjKlHykh9JSdY2trgX-aLAEzd3URtFdVbYIlAgxll6KS6gL4BdmV6o9hNsLTQ/exec
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Joe’s Awesome Daily Start</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
+  background: #f6f7fb;
+  color: #111;
+}
+header {
+  padding: 16px 24px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.container {
+  display: grid;
+  grid-template-columns: 280px 1fr 260px;
+  gap: 16px;
+  padding: 16px;
+}
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #444;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  padding: 6px 0;
+}
+a {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 500;
+}
+.focus li {
+  font-size: 15px;
+}
+.small {
+  font-size: 12px;
+  color: #777;
+}
+</style>
+</head>
+
+<body>
+<header>Joe’s Awesome Daily Start</header>
+
+<div class="container">
+
+<!-- TODAY FOCUS -->
+<div class="card">
+  <h3>🔥 Today Focus</h3>
+  <ul id="today-focus" class="focus">
+    <li class="small">Loading…</li>
+  </ul>
+</div>
+
+<!-- CENTER COLUMN -->
+<div>
+  <div class="card">
+    <h3>☀️ Daily Start</h3>
+    <ul>
+      <li><a href="https://mail.google.com" target="_blank">Gmail</a></li>
+      <li><a href="https://www.nytimes.com" target="_blank">NYTimes</a></li>
+      <li><a href="https://www.syracuse.com" target="_blank">Syracuse.com</a></li>
+    </ul>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h3>🧠 Tools</h3>
+    <ul>
+      <li><a href="https://chatgpt.com" target="_blank">ChatGPT</a></li>
+      <li><a href="https://www.openevidence.com" target="_blank">OpenEvidence</a></li>
+      <li><a href="https://notebooklm.google.com" target="_blank">NotebookLM</a></li>
+      <li><a href="https://grok.com" target="_blank">Grok</a></li>
+    </ul>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h3>🎷 Music</h3>
+    <ul>
+      <li><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank">Practice Roadmap</a></li>
+      <li><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank">Saxophone Practice</a></li>
+      <li><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank">Backing Tracks</a></li>
+      <li><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank">Sheet Music</a></li>
+      <li><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank">Music Contents</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- RIGHT COLUMN -->
+<div>
+  <div class="card">
+    <h3>🏥 Pharm Care Consulting</h3>
+    <ul>
+      <li><a href="https://medicisj-ship-it.github.io/pcc-website/" target="_blank">PCC Website</a></li>
+    </ul>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <h3>🌐 Social Media</h3>
+    <ul>
+      <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+      <li><a href="https://x.com" target="_blank">X</a></li>
+      <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+      <li><a href="https://www.tiktok.com" target="_blank">TikTok</a></li>
+      <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+const TODAY_FOCUS_FEED_URL = "https://script.google.com/macros/s/AKfycbXXXXXXXX/exec";
+
+fetch(TODAY_FOCUS_FEED_URL)
+  .then(r => r.json())
+  .then(data => {
+    const ul = document.getElementById("today-focus");
+    ul.innerHTML = "";
+    if (!data.tasks || data.tasks.length === 0) {
+      ul.innerHTML = "<li class='small'>No tasks</li>";
+      return;
+    }
+    data.tasks.slice(0,6).forEach(t => {
+      const li = document.createElement("li");
+      li.textContent = "• " + t;
+      ul.appendChild(li);
+    });
+  })
+  .catch(() => {
+    document.getElementById("today-focus").innerHTML =
+      "<li class='small'>Load failed</li>";
+  });
+</script>
+
+</body>
+</html>
