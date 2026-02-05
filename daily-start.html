@@ -3,193 +3,229 @@
 <head>
 <meta charset="utf-8">
 <title>Joe’s Awesome Daily Start</title>
-  <!-- STOCK TICKER (TradingView) -->
-<div style="padding:0 16px 16px;">
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript"
-      src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-      "symbols": [
-        {"proName":"NASDAQ:MDGL","title":"Madrigal"},
-        {"proName":"NASDAQ:ABVX","title":"Abivax"},
-        {"proName":"NASDAQ:CYTK","title":"Cytokinetics"},
-        {"proName":"NASDAQ:QQQ","title":"QQQ"},
-        {"proName":"NASDAQ:VKTX","title":"Viking"},
-        {"proName":"NASDAQ:APLS","title":"Apellis"},
-        {"proName":"OTC:NWBO","title":"NWBO"},
-        {"proName":"NASDAQ:KZIA","title":"Kazia"},
-        {"proName":"NASDAQ:BCYC","title":"Bicycle"},
-        {"proName":"NASDAQ:XFOR","title":"X4 Pharma"},
-        {"proName":"AMEX:XBI","title":"XBI"},
-        {"proName":"NASDAQ:XENE","title":"Xenon"},
-        {"proName":"NASDAQ:DAWN","title":"Day One"},
-        {"proName":"NASDAQ:RVMD","title":"Revolution"},
-        {"proName":"AMEX:SBIO","title":"SBIO"},
-        {"proName":"AMEX:IDNA","title":"IDNA"},
-        {"proName":"NASDAQ:TGTX","title":"TG Therapeutics"},
-        {"proName":"NASDAQ:ALT","title":"Altimmune"},
-        {"proName":"NASDAQ:INSM","title":"Insmed"}
-      ],
-      "showSymbolLogo": true,
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "locale": "en"
-    }
-    </script>
-  </div>
-</div>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
-  background: #f6f7fb;
-  color: #111;
-}
-header {
-  padding: 16px 24px;
-  font-size: 22px;
-  font-weight: 700;
-}
-.container {
-  display: grid;
-  grid-template-columns: 280px 1fr 260px;
-  gap: 16px;
-  padding: 16px;
-}
-.card {
-  background: white;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 4px 14px rgba(0,0,0,.08);
-}
-.card h3 {
-  margin: 0 0 10px;
-  font-size: 15px;
-  color: #444;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-li {
-  padding: 6px 0;
-}
-a {
-  text-decoration: none;
-  color: #2563eb;
-  font-weight: 500;
-}
-.focus li {
-  font-size: 15px;
-}
-.small {
-  font-size: 12px;
-  color: #777;
-}
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
+    background: #f6f7fb;
+    color: #111;
+  }
+  header {
+    padding: 16px 24px 10px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  /* ticker area */
+  #stock-ticker { padding: 0 16px 16px; }
+
+  .container {
+    display: grid;
+    grid-template-columns: 280px 1fr 260px;
+    gap: 16px;
+    padding: 16px;
+    align-items: start;
+  }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+  }
+
+  .card h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #444;
+  }
+
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { padding: 6px 0; }
+
+  a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+  }
+
+  .focus li { font-size: 15px; }
+
+  .small { font-size: 12px; color: #777; }
+
+  @media (max-width: 1000px) {
+    .container { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 
 <body>
 <header>Joe’s Awesome Daily Start</header>
 
+<div id="stock-ticker"></div>
+
 <div class="container">
 
-<!-- TODAY FOCUS -->
-<div class="card">
-  <h3>🔥 Today Focus</h3>
-  <ul id="today-focus" class="focus">
-    <li class="small">Loading…</li>
-  </ul>
-</div>
-
-<!-- CENTER COLUMN -->
-<div>
+  <!-- TODAY FOCUS -->
   <div class="card">
-    <h3>☀️ Daily Start</h3>
-    <ul>
-      <li><a href="https://mail.google.com" target="_blank">Gmail</a></li>
-      <li><a href="https://www.nytimes.com" target="_blank">NYTimes</a></li>
-      <li><a href="https://www.syracuse.com" target="_blank">Syracuse.com</a></li>
+    <h3>🔥 Today Focus</h3>
+    <ul id="today-focus" class="focus">
+      <li class="small">Loading…</li>
     </ul>
   </div>
 
-  <br>
+  <!-- CENTER COLUMN -->
+  <div>
+    <div class="card">
+      <h3>☀️ Daily Start</h3>
+      <ul>
+        <li><a href="https://mail.google.com" target="_blank" rel="noopener">Gmail</a></li>
+        <li><a href="https://www.nytimes.com" target="_blank" rel="noopener">NYTimes</a></li>
+        <li><a href="https://www.syracuse.com" target="_blank" rel="noopener">Syracuse.com</a></li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h3>🧠 Tools</h3>
-    <ul>
-      <li><a href="https://chatgpt.com" target="_blank">ChatGPT</a></li>
-      <li><a href="https://www.openevidence.com" target="_blank">OpenEvidence</a></li>
-      <li><a href="https://notebooklm.google.com" target="_blank">NotebookLM</a></li>
-      <li><a href="https://grok.com" target="_blank">Grok</a></li>
-    </ul>
+    <br>
+
+    <div class="card">
+      <h3>🧠 Tools</h3>
+      <ul>
+        <li><a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a></li>
+        <li><a href="https://www.openevidence.com" target="_blank" rel="noopener">OpenEvidence</a></li>
+        <li><a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a></li>
+        <li><a href="https://grok.com" target="_blank" rel="noopener">Grok</a></li>
+      </ul>
+    </div>
+
+    <br>
+
+    <div class="card">
+      <h3>🎷 Music</h3>
+      <ul>
+        <li><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank" rel="noopener">Practice Roadmap</a></li>
+        <li><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank" rel="noopener">Saxophone Practice</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank" rel="noopener">Backing Tracks</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank" rel="noopener">Sheet Music</a></li>
+        <li><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank" rel="noopener">Music Contents</a></li>
+      </ul>
+    </div>
   </div>
 
-  <br>
+  <!-- RIGHT COLUMN -->
+  <div>
+    <div class="card">
+      <h3>🏥 Pharm Care Consulting</h3>
+      <ul>
+        <li><a href="https://medicisj-ship-it.github.io/pcc-website/" target="_blank" rel="noopener">PCC Website</a></li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h3>🎷 Music</h3>
-    <ul>
-      <li><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank">Practice Roadmap</a></li>
-      <li><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank">Saxophone Practice</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank">Backing Tracks</a></li>
-      <li><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank">Sheet Music</a></li>
-      <li><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank">Music Contents</a></li>
-    </ul>
+    <br>
+
+    <div class="card">
+      <h3>🌐 Social Media</h3>
+      <ul>
+        <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
+        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
   </div>
-</div>
-
-<!-- RIGHT COLUMN -->
-<div>
-  <div class="card">
-    <h3>🏥 Pharm Care Consulting</h3>
-    <ul>
-      <li><a href="https://medicisj-ship-it.github.io/pcc-website/" target="_blank">PCC Website</a></li>
-    </ul>
-  </div>
-
-  <br>
-
-  <div class="card">
-    <h3>🌐 Social Media</h3>
-    <ul>
-      <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-      <li><a href="https://x.com" target="_blank">X</a></li>
-      <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-      <li><a href="https://www.tiktok.com" target="_blank">TikTok</a></li>
-      <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-    </ul>
-  </div>
-</div>
 
 </div>
 
 <script>
-const https://script.google.com/macros/s/AKfycbwMKRGs2tjKlHykh9JSdY2trgX-aLAEzd3URtFdVbYIlAgxll6KS6gL4BdmV6o9hNsLTQ/exec
+  /******************** TODAY FOCUS (LIVE) **************************/
+  const TODAY_FOCUS_FEED_URL =
+    "https://script.google.com/macros/s/AKfycbwMKRGs2tjKlHykh9JSdY2trgX-aLAEzd3URtFdVbYIlAgxll6KS6gL4BdmV6o9hNsLTQ/exec";
 
-fetch(TODAY_FOCUS_FEED_URL)
-  .then(r => r.json())
-  .then(data => {
+  async function loadTodayFocus(){
     const ul = document.getElementById("today-focus");
-    ul.innerHTML = "";
-    if (!data.tasks || data.tasks.length === 0) {
-      ul.innerHTML = "<li class='small'>No tasks</li>";
-      return;
+    ul.innerHTML = "<li class='small'>Loading…</li>";
+
+    try {
+      const r = await fetch(TODAY_FOCUS_FEED_URL, { cache: "no-store" });
+      const data = await r.json();
+
+      if (!data || !data.ok) {
+        ul.innerHTML = "<li class='small'>Feed error (ok:false)</li>";
+        return;
+      }
+
+      const tasks = Array.isArray(data.tasks) ? data.tasks : [];
+      if (tasks.length === 0) {
+        ul.innerHTML = "<li class='small'>No tasks</li>";
+        return;
+      }
+
+      ul.innerHTML = "";
+      tasks.slice(0,6).forEach(t => {
+        const title = (t && typeof t === "object") ? (t.title || "") : String(t || "");
+        const li = document.createElement("li");
+        li.textContent = "• " + title;
+        ul.appendChild(li);
+      });
+
+    } catch (e) {
+      ul.innerHTML = "<li class='small'>Load failed (check Web App access: Anyone)</li>";
     }
-    data.tasks.slice(0,6).forEach(t => {
-      const li = document.createElement("li");
-      li.textContent = "• " + t;
-      ul.appendChild(li);
+  }
+
+  loadTodayFocus();
+  setInterval(loadTodayFocus, 5 * 60 * 1000);
+
+  /******************** STOCK TICKER (TRADINGVIEW) *******************/
+  (function addTicker(){
+    const host = document.getElementById("stock-ticker");
+    if (!host) return;
+
+    const wrap = document.createElement("div");
+    wrap.className = "tradingview-widget-container";
+
+    const widget = document.createElement("div");
+    widget.className = "tradingview-widget-container__widget";
+
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js";
+
+    script.text = JSON.stringify({
+      symbols: [
+        {proName:"NASDAQ:MDGL", title:"Madrigal"},
+        {proName:"NASDAQ:ABVX", title:"Abivax"},
+        {proName:"NASDAQ:CYTK", title:"Cytokinetics"},
+        {proName:"NASDAQ:QQQ",  title:"QQQ"},
+        {proName:"NASDAQ:VKTX", title:"Viking"},
+        {proName:"NASDAQ:APLS", title:"Apellis"},
+        {proName:"OTC:NWBO",    title:"NWBO"},
+        {proName:"NASDAQ:KZIA", title:"Kazia"},
+        {proName:"NASDAQ:BCYC", title:"Bicycle"},
+        {proName:"NASDAQ:XFOR", title:"X4 Pharma"},
+        {proName:"AMEX:XBI",    title:"XBI"},
+        {proName:"NASDAQ:XENE", title:"Xenon"},
+        {proName:"NASDAQ:DAWN", title:"Day One"},
+        {proName:"NASDAQ:RVMD", title:"Revolution"},
+        {proName:"AMEX:SBIO",   title:"SBIO"},
+        {proName:"AMEX:IDNA",   title:"IDNA"},
+        {proName:"NASDAQ:TGTX", title:"TG Therapeutics"},
+        {proName:"NASDAQ:ALT",  title:"Altimmune"},
+        {proName:"NASDAQ:INSM", title:"Insmed"}
+      ],
+      showSymbolLogo: true,
+      isTransparent: false,
+      displayMode: "adaptive",
+      locale: "en"
     });
-  })
-  .catch(() => {
-    document.getElementById("today-focus").innerHTML =
-      "<li class='small'>Load failed</li>";
-  });
+
+    wrap.appendChild(widget);
+    wrap.appendChild(script);
+    host.appendChild(wrap);
+  })();
 </script>
 
 </body>
