@@ -6,91 +6,115 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-:root {
-  --royal: #1e3a8a;
-  --card: #ffffff;
-  --ink: #0f172a;
-  --muted: #6b7280;
-  --accent: #2563eb;
-  --focus: #0ea5e9;
+:root{
+  --royal:#1e3a8a;
+  --card:#ffffff;
+  --ink:#0f172a;
+  --muted:#6b7280;
+  --accent:#2563eb;
+  --focus:#0ea5e9;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, var(--royal) 0%, #0b1f4d 220px, #f4f6fb 221px);
-  color: var(--ink);
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--royal) 0%, #0b1f4d 220px, #f4f6fb 221px);
+  color:var(--ink);
+  font-size:18px; /* bigger font */
 }
 
-header {
-  padding: 20px 26px 10px;
-  font-size: 22px;
-  font-weight: 700;
-  color: white;
+header{
+  padding:22px 26px 12px;
+  font-size:26px;
+  font-weight:800;
+  color:white;
 }
 
-#stock-ticker { padding: 0 16px 16px; }
+#stock-ticker{ padding:0 16px 16px; }
 
-.container {
-  display: grid;
-  grid-template-columns: 320px 520px 260px;
-  gap: 18px;
-  padding: 16px;
-  align-items: start;
+.container{
+  display:grid;
+  grid-template-columns:340px 520px 300px 420px; /* + Calendar column */
+  gap:20px;
+  padding:18px;
+  align-items:start;
 }
 
-.card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08),
-              0 2px 6px rgba(15, 23, 42, 0.05);
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 30px rgba(15,23,42,.08), 0 2px 6px rgba(15,23,42,.05);
 }
 
-.card h3 {
-  margin: 0 0 12px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .4px;
-  text-transform: uppercase;
-  color: var(--muted);
+.card h3{
+  margin:0 0 14px;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  color:var(--muted);
 }
 
-ul { list-style: none; padding: 0; margin: 0; }
-li { padding: 7px 0; }
+ul{ list-style:none; padding:0; margin:0; }
 
-a {
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 500;
+li{
+  padding:9px 0;
+  line-height:1.4;
+  font-size:18px;
 }
 
-a:hover { text-decoration: underline; }
+a{
+  text-decoration:none;
+  color:var(--accent);
+  font-weight:600;
+}
+a:hover{ text-decoration:underline; }
 
-.focus li {
-  font-size: 15px;
-  font-weight: 500;
+.small{ font-size:13px; color:var(--muted); }
+
+.icon{
+  display:inline-block;
+  width:28px;
+  font-size:20px;
 }
 
-.focus li::before {
-  content: "•";
-  color: var(--focus);
-  margin-right: 8px;
+/* Today Focus emphasis */
+.focus li{
+  font-size:19px;
+  font-weight:800;
+}
+.focus li::before{
+  content:"•";
+  color:var(--focus);
+  margin-right:10px;
 }
 
-.small { font-size: 12px; color: var(--muted); }
-
-.column .card + .card { margin-top: 16px; }
-
-.icon {
-  display: inline-block;
-  width: 22px;
+/* Calendar */
+.calendar-card{
+  padding:0;
+  overflow:hidden;
+}
+.calendar-head{
+  padding:18px 18px 0;
+}
+.calendar-iframe{
+  width:100%;
+  height:820px;
+  border:0;
+  display:block;
 }
 
-@media (max-width: 1100px) {
-  .container { grid-template-columns: 1fr; }
-  header { text-align: center; }
+/* Responsive */
+@media (max-width:1400px){
+  .container{ grid-template-columns:340px 1fr 320px; }
+  .calendar-column{ grid-column:1 / -1; }
+  .calendar-iframe{ height:720px; }
+}
+@media (max-width:1100px){
+  .container{ grid-template-columns:1fr; }
+  header{ text-align:center; }
+  .calendar-iframe{ height:680px; }
 }
 </style>
 </head>
@@ -102,78 +126,94 @@ a:hover { text-decoration: underline; }
 
 <div class="container">
 
-<!-- LEFT COLUMN -->
-<div class="column">
+  <!-- LEFT COLUMN -->
+  <div class="column">
+    <div class="card">
+      <h3>🔥 Today Focus</h3>
+      <ul id="today-focus" class="focus">
+        <li class="small">Loading…</li>
+      </ul>
+      <div class="small" style="margin-top:8px;">Rule: max 6 items.</div>
+    </div>
 
-  <div class="card">
-    <h3>🔥 Today Focus</h3>
-    <ul id="today-focus" class="focus">
-      <li class="small">Loading…</li>
-    </ul>
+    <div class="card" style="margin-top:18px;">
+      <h3>☀️ Daily Start</h3>
+      <ul>
+        <li><span class="icon">📧</span><a href="https://mail.google.com" target="_blank" rel="noopener">Gmail</a></li>
+        <li><span class="icon">📰</span><a href="https://www.nytimes.com" target="_blank" rel="noopener">NYTimes</a></li>
+        <li><span class="icon">🏠</span><a href="https://www.syracuse.com" target="_blank" rel="noopener">Syracuse.com</a></li>
+      </ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>☀️ Daily Start</h3>
-    <ul>
-      <li><span class="icon">📧</span><a href="https://mail.google.com" target="_blank">Gmail</a></li>
-      <li><span class="icon">📰</span><a href="https://www.nytimes.com" target="_blank">NYTimes</a></li>
-      <li><span class="icon">🏠</span><a href="https://www.syracuse.com" target="_blank">Syracuse.com</a></li>
-    </ul>
+  <!-- MIDDLE COLUMN -->
+  <div class="column">
+    <div class="card">
+      <h3>💼 Markets & Money</h3>
+      <ul>
+        <li><span class="icon">📊</span><a href="https://digital.fidelity.com/" target="_blank" rel="noopener">Fidelity</a></li>
+        <li><span class="icon">💰</span><a href="https://wealth.emaplan.com/ema/SignIn?ema%2Fria%2Fdakotawm" target="_blank" rel="noopener">eMoney</a></li>
+        <li><span class="icon">🏦</span><a href="https://shareworks.solium.com/solium/servlet/userLogin.do?message_key=sign_in_to_continue" target="_blank" rel="noopener">Morgan Stanley</a></li>
+        <li><span class="icon">💬</span><a href="https://stocktwits.com/symbol/MDGL" target="_blank" rel="noopener">MDGL (StockTwits)</a></li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <h3>🧠 Tools</h3>
+      <ul>
+        <li><span class="icon">🤖</span><a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a></li>
+        <li><span class="icon">🧪</span><a href="https://www.openevidence.com" target="_blank" rel="noopener">OpenEvidence</a></li>
+        <li><span class="icon">📓</span><a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a></li>
+        <li><span class="icon">⚡</span><a href="https://grok.com" target="_blank" rel="noopener">Grok</a></li>
+      </ul>
+    </div>
   </div>
 
-</div>
+  <!-- RIGHT COLUMN -->
+  <div class="column">
+    <div class="card">
+      <h3>🏥 Pharm Care Consulting</h3>
+      <ul>
+        <li><span class="icon">🌐</span><a href="https://medicisj-ship-it.github.io/pcc-website/" target="_blank" rel="noopener">PCC Website</a></li>
+      </ul>
+    </div>
 
-<!-- MIDDLE COLUMN (INTENTIONALLY NARROWER) -->
-<div class="column">
+    <div class="card" style="margin-top:18px;">
+      <h3>🎷 Music</h3>
+      <ul>
+        <li><span class="icon">📄</span><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank" rel="noopener">Practice Roadmap</a></li>
+        <li><span class="icon">🎷</span><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank" rel="noopener">Practice Center</a></li>
+        <li><span class="icon">🎧</span><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank" rel="noopener">Backing Tracks</a></li>
+        <li><span class="icon">🎼</span><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank" rel="noopener">Sheet Music</a></li>
+        <li><span class="icon">📚</span><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank" rel="noopener">Music Contents</a></li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h3>💼 Markets & Money</h3>
-    <ul>
-      <li><span class="icon">📊</span><a href="https://digital.fidelity.com/" target="_blank">Fidelity</a></li>
-      <li><span class="icon">💰</span><a href="https://wealth.emaplan.com/ema/SignIn?ema%2Fria%2Fdakotawm" target="_blank">eMoney</a></li>
-      <li><span class="icon">🏦</span><a href="https://shareworks.solium.com/solium/servlet/userLogin.do?message_key=sign_in_to_continue" target="_blank">Morgan Stanley</a></li>
-      <li><span class="icon">💬</span><a href="https://stocktwits.com/symbol/MDGL" target="_blank">MDGL (StockTwits)</a></li>
-    </ul>
+    <div class="card" style="margin-top:18px;">
+      <h3>🌐 Social</h3>
+      <ul>
+        <li><span class="icon">📘</span><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+        <li><span class="icon">🐦</span><a href="https://x.com" target="_blank" rel="noopener">X</a></li>
+        <li><span class="icon">📸</span><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+        <li><span class="icon">🎥</span><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+        <li><span class="icon">💼</span><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>🧠 Tools</h3>
-    <ul>
-      <li><span class="icon">🤖</span><a href="https://chatgpt.com" target="_blank">ChatGPT</a></li>
-      <li><span class="icon">🧪</span><a href="https://www.openevidence.com" target="_blank">OpenEvidence</a></li>
-      <li><span class="icon">📓</span><a href="https://notebooklm.google.com" target="_blank">NotebookLM</a></li>
-      <li><span class="icon">⚡</span><a href="https://grok.com" target="_blank">Grok</a></li>
-    </ul>
+  <!-- FAR RIGHT COLUMN: CALENDAR -->
+  <div class="column calendar-column">
+    <div class="card calendar-card">
+      <div class="calendar-head">
+        <h3>📅 Calendar</h3>
+      </div>
+      <iframe
+        class="calendar-iframe"
+        src="https://calendar.google.com/calendar/embed?src=medicisj%40gmail.com&ctz=America%2FNew_York"
+        scrolling="no">
+      </iframe>
+    </div>
   </div>
-
-</div>
-
-<!-- RIGHT COLUMN -->
-<div class="column">
-
-  <div class="card">
-    <h3>🎷 Music</h3>
-    <ul>
-      <li><span class="icon">📄</span><a href="https://docs.google.com/document/d/1f2MuBG5zG8EG_STX6Gs5DuMm6Kfofb59a-PRxTPAk4A" target="_blank">Practice Roadmap</a></li>
-      <li><span class="icon">🎷</span><a href="https://artofsaxophone.app.clientclub.net/communities/groups/saxophone-practice-center/learning" target="_blank">Practice Center</a></li>
-      <li><span class="icon">🎧</span><a href="https://drive.google.com/drive/folders/1LmQp4bxa5eZ8b64z1VhFaiJgTOhvJuHb" target="_blank">Backing Tracks</a></li>
-      <li><span class="icon">🎼</span><a href="https://drive.google.com/drive/folders/1_8ArYzwc5_GTkQDMXYNluDPfTnhaC1Vx" target="_blank">Sheet Music</a></li>
-      <li><span class="icon">📚</span><a href="https://docs.google.com/spreadsheets/d/130Opp4kFlMaL_kmaWjVRwhujXuAoOCT3xtrGIraewmc" target="_blank">Music Contents</a></li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h3>🌐 Social</h3>
-    <ul>
-      <li><span class="icon">📘</span><a href="https://facebook.com" target="_blank">Facebook</a></li>
-      <li><span class="icon">🐦</span><a href="https://x.com" target="_blank">X</a></li>
-      <li><span class="icon">📸</span><a href="https://instagram.com" target="_blank">Instagram</a></li>
-      <li><span class="icon">🎥</span><a href="https://www.tiktok.com" target="_blank">TikTok</a></li>
-      <li><span class="icon">💼</span><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-    </ul>
-  </div>
-
-</div>
 
 </div>
 
@@ -185,17 +225,20 @@ const TODAY_FOCUS_FEED_URL =
 async function loadTodayFocus(){
   const ul = document.getElementById("today-focus");
   ul.innerHTML = "<li class='small'>Loading…</li>";
-  try {
-    const r = await fetch(TODAY_FOCUS_FEED_URL, { cache: "no-store" });
+  try{
+    const r = await fetch(TODAY_FOCUS_FEED_URL, { cache:"no-store" });
     const data = await r.json();
-    if (!data || !data.ok) throw "feed";
+    if(!data || !data.ok) throw new Error("feed");
     ul.innerHTML = "";
-    data.tasks.slice(0,6).forEach(t => {
+    (data.tasks || []).slice(0,6).forEach(t => {
       const li = document.createElement("li");
       li.textContent = t.title;
       ul.appendChild(li);
     });
-  } catch {
+    if(!data.tasks || data.tasks.length === 0){
+      ul.innerHTML = "<li class='small'>No tasks</li>";
+    }
+  }catch(e){
     ul.innerHTML = "<li class='small'>Unable to load tasks</li>";
   }
 }
